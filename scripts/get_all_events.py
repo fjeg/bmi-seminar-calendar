@@ -4,7 +4,7 @@ import med_seminar_scraper
 import google_seminar_scraper
 import biostats_seminar_scraper
 import tumor_boards_scraper
-import Event
+from Event import Event
 
 import jinja2
 from datetime import datetime,timedelta
