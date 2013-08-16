@@ -16,23 +16,25 @@ def get_events(calendar_id,dept):
     output=[]
     #print(events)
     for e in events:
-        res={}
-        start=e[u'start']
-        end=e[u'end']
-        if u'dateTime' in start:
-            res['start_time']=start[u'dateTime'][:-9]
-            res['end_time']=end[u'dateTime'][:-9]
-        else:
-            res['start_time']=start[u'date']+u'T00:00'
-            res['end_time']=end[u'date']+u'T00:00'
-            
-        res['speaker']=u""
-        res['department']=dept
-        res['description']=e.get(u'description','')
-        res['location']=e.get(u'location','')
-        res['title']=e.get(u'summary','')
-        res['link']=e.get(u'htmlLink','')
-        #print(res)
-        output.append(Event.from_dict(res))
+        if e[u'status'] != u'cancelled':
+            #print(e)
+            res={}
+            start=e[u'start']
+            end=e[u'end']
+            if u'dateTime' in start:
+                res['start_time']=start[u'dateTime'][:-9]
+                res['end_time']=end[u'dateTime'][:-9]
+            else:
+                res['start_time']=start[u'date']+u'T00:00'
+                res['end_time']=end[u'date']+u'T00:00'
+                
+            res['speaker']=u""
+            res['department']=dept
+            res['description']=e.get(u'description','')
+            res['location']=e.get(u'location','')
+            res['title']=e.get(u'summary','')
+            res['link']=e.get(u'htmlLink','')
+            #print(res)
+            output.append(Event.from_dict(res))
         
     return output
