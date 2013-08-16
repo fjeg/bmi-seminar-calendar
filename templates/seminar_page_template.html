@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+        BMI Seminar Calendar
+        </title>
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <style type="text/css">
+      	body {
+        	padding-top: 60px;
+        	padding-bottom: 40px;
+      	}
+      	.sidebar-nav {
+        padding: 9px 0;
+      	}
+
+      	@media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+    </style>
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    </head>
+
+    <body>
+    	<div class="navbar navbar-inverse navbar-fixed-top">
+      	<div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="#">BMI-related events</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Filters</li>
+              <li>Statistics</li>
+              <li>BioStats</li>
+              <li>BMI Tuesday Talks</li>
+              <li>CS</li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+            <table class="table">
+                <tbody>
+                <!-- SEMINAR CONTENT GOES HERE -->
+                {% for e in event_list %}
+                    <tr>
+                        <td> {{ e.get_fmt_start_date('%B %d') }} </td>
+                        <td> {{ e.get_fmt_start_date('%I:%M %p') }} - {{ e.get_fmt_end_date('%I:%M %p') }}</td>
+                        <td> {{ e.speaker }} </td>
+                        <td><strong>{{ e.title }}</strong>
+
+                            {% if e.description != '' %}
+                            <br /> 
+                            {{ e.description }} 
+                            {% endif %}
+
+                            {% if e.link != '' %}
+                            <br /> 
+                            <a href="{{ e.link }}"> More Information </a>
+                            {% endif %}
+
+                        </td>
+                        <td> {{ e.location }} </td>
+                        <td> {{ e.department }} </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div><!--/span-->
+      	</div><!--/row-->
+        </div>
+    </body>
+</html>
