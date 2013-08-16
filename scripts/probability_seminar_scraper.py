@@ -16,7 +16,6 @@ def get_events():
     department = 'Probability'
 
     event_list = []
-
     for headline in headlines:
         month,YYYY = headline.string.split()
         table = headline.find_next_sibling('table')
@@ -26,26 +25,23 @@ def get_events():
             event_html = institution.parent
             event_entries = event_html.find_all('td')
 
-            event_elements = []
-            event_dict = {}
-            for idx,element in enumerate(event_entries):
-                event_elements.append( element.get_text() )
-
-            if '---' in event_elements[3]:
+            if '---' in event_entries[3].get_text():
                 continue
 
+            event_dict = {}
+
             # date time
-            MM,DD = event_elements[0][:5].split('.')
+            MM,DD = event_entries[0].get_text()[:5].split('.')
             event_dict['start_time'] = YYYY + '-' + MM + '-' + DD + 'T' + start_HH + ':' + start_MM
             event_dict['end_time'] = YYYY + '-' + MM + '-' + DD + 'T' + end_HH + ':' + end_MM
 
             event_dict['department'] = department
-            event_dict['speaker'] = event_elements[1]
-            event_dict['title'] = event_elements[3]
+            event_dict['speaker'] = event_entries[1].get_text()
+            event_dict['title'] = event_entries[3].get_text()
             event_dict['description'] = ''
             event_dict['location'] = location
             event_dict['tags'] = []
-            event_dict['link'] = ''
+            event_dict['link'] = event_entries[4].find('a')['href']
 
             event = Event.from_dict(event_dict)
             event_list.append(event)
