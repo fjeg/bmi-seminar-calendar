@@ -81,6 +81,8 @@ def parse_info(info):
         link=link['href']
         if 'http' not in link:
             link=base_url+link
+    else:
+        link=''
     res={}
     res['title']=title
     res['location']=loc
