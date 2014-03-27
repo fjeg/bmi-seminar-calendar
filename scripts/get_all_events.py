@@ -4,7 +4,7 @@ import med_seminar_scraper
 import google_seminar_scraper
 import biostats_seminar_scraper
 import tumor_boards_scraper
-from Event import Event
+import Event
 
 import jinja2
 from datetime import datetime,timedelta
@@ -32,7 +32,7 @@ for e in event_list:
 
 
 #Build webpage from event list
-templateLoader = jinja2.FileSystemLoader( searchpath="../templates/" )
+templateLoader = jinja2.FileSystemLoader( searchpath="./templates/" )
 templateEnv = jinja2.Environment( loader=templateLoader )
 
 TEMPLATE_FILE = "seminar_page_template.html"
@@ -41,9 +41,9 @@ template = templateEnv.get_template( TEMPLATE_FILE )
 templateVars = { "event_list" : cur_event_list }
 outputText = template.render( templateVars ).encode('utf8')
 
-with open('../WWW/bmi_seminars.ics','w') as ics:
-    ics.write(Event.to_ics(cur_event_list))
+with open('bmi_seminars.ics','w') as ics:
+    ics.write(Event.Event.to_ics(cur_event_list))
 
-with open('../WWW/seminar_page.html','w') as f:
+with open('seminar_page.html','w') as f:
     f.write(outputText)
 
