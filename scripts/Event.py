@@ -1,4 +1,5 @@
 from datetime import datetime
+
 import vobject
 
 defaults = {}
@@ -163,6 +164,7 @@ class Event():
             en=datetime.strptime(e.end_time, '%Y-%m-%dT%H:%M')
             elem.add('dtstart').value=st
             elem.add('dtend').value=en
+            elem.add('location').value=e.location
         return cal.serialize()
         
     def to_google(self,api_key):
