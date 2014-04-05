@@ -157,12 +157,13 @@ class Event():
             desc+="Department: " + e.department + "\n\n"
             desc+="Tags: " + ", ".join(e.tags) + "\n\n"
             desc+="Description: " + e.description + "\n\n"
-            desc+="Link: " + e.link + "\n"
+            desc+="Link: " + str(e.link) + "\n"
             elem.add('description').value=desc
             st=datetime.strptime(e.start_time, '%Y-%m-%dT%H:%M')
             en=datetime.strptime(e.end_time, '%Y-%m-%dT%H:%M')
             elem.add('dtstart').value=st
             elem.add('dtend').value=en
+            elem.add('location').value=e.location
         return cal.serialize()
         
     def to_google(self,api_key):

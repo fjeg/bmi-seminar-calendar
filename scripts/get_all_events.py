@@ -17,7 +17,7 @@ event_list.extend( probability_seminar_scraper.get_events() )
 event_list.extend( med_seminar_scraper.get_events() )
 event_list.extend( google_seminar_scraper.get_events('forumstanford@gmail.com','CS') )
 event_list.extend( google_seminar_scraper.get_events('0huf8fn26r1fosph2u419gl79s@group.calendar.google.com','BMI') )
-event_list.extend( biostats_seminar_scraper.get_events() )
+#event_list.extend( biostats_seminar_scraper.get_events() )
 event_list.extend( tumor_boards_scraper.get_events() )
 event_list.sort()
 cur_event_list = []
